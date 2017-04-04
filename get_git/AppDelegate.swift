@@ -21,19 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ///////////////////////////////Type this in to print the url///////////////////////////////////////////////////
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let code = try? GitHub.shared.getCodeFrom(url: url)
-        
-        print(code)
-        
         if let token = UserDefaults.standard.getAccessToken() {
             print("You already have signed in with token: \(token)")
-        }
-        
-        GitHub.shared.tokenRequestFor(url: url, saveOptions: .userDefaults) { (success) in
-            if success {
-                print("Got access Token")
-            } else {
-                print("Bummer! No success")
+        } else {
+            GitHub.shared.tokenRequestFor(url: url, saveOptions: .userDefaults) { (success) in
+                if success {
+                    print("Got access Token")
+                } else {
+                    print("Bummer! No success")
+                }
             }
         }
         //this will print out the url in the github.swift file
