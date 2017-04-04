@@ -18,6 +18,7 @@ class GitHubAuthController: UIViewController {
     @IBAction func printTokenPressed(_ sender: Any) {
         
     }
+    
     @IBOutlet weak var loginButtonOutlet: UIButton!
     
     func hideUnhideLoginButton() {

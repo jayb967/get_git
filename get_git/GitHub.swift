@@ -74,7 +74,9 @@ class GitHub {
                     guard let data = data else { complete(success: false); return } //needs ; to break since its a guard
                     
                     if let dataString = String(data: data, encoding: .utf8){
-                        UserDefaults().save(accessToken: dataString)
+                        if UserDefaults().save(accessToken: dataString) {
+                            print("Saved!!")
+                        }
                         print(dataString)
                         
                         complete(success: true)//complete is the function in the tokenRequestFor func
