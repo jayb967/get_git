@@ -97,11 +97,16 @@ class GitHub {
                     guard let data = data else { complete(success: false); return } //needs ; to break since its a guard
                     
                     if let dataString = String(data: data, encoding: .utf8){
-                        if UserDefaults().save(accessToken: dataString) {
-//                            guard let accessToken = dataString.components(separatedBy: "&").first?.components(separatedBy: "=").last else { complete(success: false); return } //this is what seperates the string up and just give the token
-                            print("Saved!!")
-                            
+                        //access_token=ijwe8ud9shdfuiq9hq
+                        if let token = self.accessTokenFrom(dataString) {
+                            // ijwe8ud9shdfuiq9hq
+                            if UserDefaults.standard.save(accessToken: token) {
+                                print("saved token to userDefaults")
+                                let queryItem = URLQueryItem(name: "access_token", value: token) //URLQueryItem builds our the url for us
+                                self.components.queryItems = [queryItem]//it is then inserted into the array
+                            }
                         }
+                        
                         print(dataString)
                         
                         complete(success: true)//complete is the function in the tokenRequestFor func
@@ -123,7 +128,7 @@ class GitHub {
             }
         }
         
-        self.components.path = "/users/repos"
+        self.components.path = "/user/repos"
 
         guard let url = self.components.url else { returnToMain(results: nil); return }
         
@@ -158,27 +163,27 @@ class GitHub {
             
         }.resume()//add this or it wont happen, common bug
     }
-    
-    
-}
-
-
-
-
-
-
-
-/////////////////THIS IS THE WAY TO SEPERATE OUT THE STRING TO JUST ACCESS THE TOKEN WITHOUT THE REST OF THE STRING///////////////
-func accessTokenFrom(_ string: String) -> String? {
-    if string.contains("access_token") {
-        let components = string.components(separatedBy: "&")
-        
-        for component in components{
-            if component.contains("access_token"){
-                let token = component.components(separatedBy: "=").last
-                return token
+    /////////////////THIS IS THE WAY TO SEPERATE OUT THE STRING TO JUST ACCESS THE TOKEN WITHOUT THE REST OF THE STRING///////////////
+    func accessTokenFrom(_ string: String) -> String? {
+        if string.contains("access_token") {
+            let components = string.components(separatedBy: "&")
+            
+            for component in components{
+                if component.contains("access_token"){
+                    let token = component.components(separatedBy: "=").last
+                    return token
+                }
             }
         }
+        return nil
     }
-    return nil
+    
+    
 }
+
+
+
+
+
+
+

@@ -13,17 +13,19 @@ class Repository {
     let name: String
     let description: String?
     let language: String?
+     
+    
     
     init?(json: [String: Any]) { //Any because we are unsure of what were going to unwrap
+        print(json)
         if let name = json["name"] as? String, let description = json["description"] as? String, let language = json["language"] as? String{
             self.name = name
             self.description = description
             self.language = language
-        } else { return nil }
-        
-        print(json)
-        
-        
+        } else {
+            return nil
+        }
+
     }
     
 }

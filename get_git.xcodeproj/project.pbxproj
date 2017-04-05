@@ -18,6 +18,10 @@
 		28FCE4B01E940C0A00212B82 /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4AF1E940C0A00212B82 /* RepoViewController.swift */; };
 		28FCE4B21E940D6100212B82 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4B11E940D6100212B82 /* UIExtensions.swift */; };
 		28FCE4B41E94195800212B82 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4B31E94195800212B82 /* Repository.swift */; };
+		28FCE4B61E956E8A00212B82 /* RepoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4B51E956E8A00212B82 /* RepoDetailViewController.swift */; };
+		28FCE4B81E95707000212B82 /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4B71E95707000212B82 /* CustomTransition.swift */; };
+		28FCE4BB1E959B2F00212B82 /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4B91E959B2F00212B82 /* RepositoryCell.swift */; };
+		28FCE4BC1E959B2F00212B82 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FCE4BA1E959B2F00212B82 /* RepositoryCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		28FCE4AF1E940C0A00212B82 /* RepoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
 		28FCE4B11E940D6100212B82 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		28FCE4B31E94195800212B82 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		28FCE4B51E956E8A00212B82 /* RepoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoDetailViewController.swift; sourceTree = "<group>"; };
+		28FCE4B71E95707000212B82 /* CustomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
+		28FCE4B91E959B2F00212B82 /* RepositoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
+		28FCE4BA1E959B2F00212B82 /* RepositoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +133,8 @@
 		28FCE4AD1E9400B300212B82 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28FCE4B71E95707000212B82 /* CustomTransition.swift */,
+				28FCE4B51E956E8A00212B82 /* RepoDetailViewController.swift */,
 				28FCE4AF1E940C0A00212B82 /* RepoViewController.swift */,
 				28FCE4141E92CE6E00212B82 /* GitHubAuthController.swift */,
 				28FCE4161E92EC2B00212B82 /* FoundationExtensions.swift */,
@@ -135,6 +145,8 @@
 		28FCE4AE1E9400C500212B82 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				28FCE4B91E959B2F00212B82 /* RepositoryCell.swift */,
+				28FCE4BA1E959B2F00212B82 /* RepositoryCell.xib */,
 				28FCE3E81E92B22A00212B82 /* Main.storyboard */,
 				28FCE3ED1E92B22A00212B82 /* LaunchScreen.storyboard */,
 			);
@@ -254,6 +266,7 @@
 				28FCE3EF1E92B22A00212B82 /* LaunchScreen.storyboard in Resources */,
 				28FCE3EC1E92B22A00212B82 /* Assets.xcassets in Resources */,
 				28FCE3EA1E92B22A00212B82 /* Main.storyboard in Resources */,
+				28FCE4BC1E959B2F00212B82 /* RepositoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,8 +297,11 @@
 				28FCE4B41E94195800212B82 /* Repository.swift in Sources */,
 				28FCE4B01E940C0A00212B82 /* RepoViewController.swift in Sources */,
 				28FCE4151E92CE6E00212B82 /* GitHubAuthController.swift in Sources */,
+				28FCE4BB1E959B2F00212B82 /* RepositoryCell.swift in Sources */,
 				28FCE3E51E92B22A00212B82 /* AppDelegate.swift in Sources */,
+				28FCE4B81E95707000212B82 /* CustomTransition.swift in Sources */,
 				28FCE4191E93370C00212B82 /* Keys.swift in Sources */,
+				28FCE4B61E956E8A00212B82 /* RepoDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
