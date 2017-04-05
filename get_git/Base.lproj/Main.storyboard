@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hoZ-Mg-gRi">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
         <!--Git Hub Auth Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GitHubAuthController" customModule="get_git" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GitHubAuthController" id="BYZ-38-t0r" customClass="GitHubAuthController" customModule="get_git" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -35,7 +35,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftA-IO-C9u">
-                                <rect key="frame" x="20" y="308" width="335" height="50"/>
+                                <rect key="frame" x="20" y="539" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.47287666302290499" green="0.541944643074872" blue="0.72223681211471558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="PLv-AQ-cLG"/>
@@ -47,16 +47,27 @@
                                     <action selector="printTokenPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DMr-cT-mBa"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github_logo_3x" translatesAutoresizingMaskIntoConstraints="NO" id="Liw-cZ-gWl">
+                                <rect key="frame" x="87" y="233" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="3Ac-kq-3hl"/>
+                                    <constraint firstAttribute="width" constant="200" id="4bv-sH-yvt"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Rwq-zV-nAQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="3Mm-GN-dnT"/>
                             <constraint firstAttribute="trailing" secondItem="ftA-IO-C9u" secondAttribute="trailing" constant="20" id="4BQ-iy-faP"/>
                             <constraint firstAttribute="trailing" secondItem="Rwq-zV-nAQ" secondAttribute="trailing" constant="20" id="EQa-69-52h"/>
+                            <constraint firstItem="Liw-cZ-gWl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LUA-pf-Zy6"/>
+                            <constraint firstItem="Liw-cZ-gWl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R2W-1t-MTv"/>
+                            <constraint firstItem="Liw-cZ-gWl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="crQ-bd-HQP"/>
                             <constraint firstItem="ftA-IO-C9u" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="gh1-cz-5JK"/>
+                            <constraint firstItem="Liw-cZ-gWl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iZU-et-RaS"/>
                             <constraint firstItem="Rwq-zV-nAQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iac-hN-EcV"/>
                             <constraint firstItem="ftA-IO-C9u" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kWY-7s-Msb"/>
-                            <constraint firstItem="ftA-IO-C9u" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wbJ-Fm-oe3"/>
+                            <constraint firstItem="ftA-IO-C9u" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="230.5" id="wbJ-Fm-oe3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Rwq-zV-nAQ" secondAttribute="bottom" constant="20" id="zSD-yA-PC7"/>
                         </constraints>
                     </view>
@@ -68,5 +79,69 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
+        <!--Repo View Controller-->
+        <scene sceneID="xts-uN-qKi">
+            <objects>
+                <viewController storyboardIdentifier="Repo" id="hoZ-Mg-gRi" customClass="RepoViewController" customModule="get_git" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gBX-qh-Kkr"/>
+                        <viewControllerLayoutGuide type="bottom" id="YNE-Bc-gq4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aMk-EF-lUB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="WaJ-yC-RL1">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="brF-rl-nh4">
+                                <rect key="frame" x="0.0" y="72" width="375" height="595"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WaJ-yC-RL1" firstAttribute="top" secondItem="gBX-qh-Kkr" secondAttribute="bottom" constant="8" id="6xe-Uh-CqN"/>
+                            <constraint firstItem="YNE-Bc-gq4" firstAttribute="top" secondItem="brF-rl-nh4" secondAttribute="bottom" id="7YR-gE-1qg"/>
+                            <constraint firstAttribute="trailing" secondItem="brF-rl-nh4" secondAttribute="trailing" id="Ihd-HQ-eWU"/>
+                            <constraint firstItem="brF-rl-nh4" firstAttribute="leading" secondItem="aMk-EF-lUB" secondAttribute="leading" id="K1A-Vz-mfS"/>
+                            <constraint firstAttribute="trailing" secondItem="WaJ-yC-RL1" secondAttribute="trailing" id="XbQ-Fc-B5v"/>
+                            <constraint firstItem="brF-rl-nh4" firstAttribute="top" secondItem="WaJ-yC-RL1" secondAttribute="bottom" id="bYD-og-N16"/>
+                            <constraint firstItem="WaJ-yC-RL1" firstAttribute="leading" secondItem="aMk-EF-lUB" secondAttribute="leading" id="fCK-Ar-LBO"/>
+                            <constraint firstItem="brF-rl-nh4" firstAttribute="top" secondItem="WaJ-yC-RL1" secondAttribute="bottom" id="wZi-ly-J7U"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="WaJ-yC-RL1" id="l2V-W0-KW6"/>
+                        <outlet property="tableViewContainingRepos" destination="brF-rl-nh4" id="aFI-Ey-cgg"/>
+                        <segue destination="2ff-8q-6nv" kind="presentation" identifier="RepoDetailViewController" id="die-tm-lX7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="41z-Bi-Ky7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056.8" y="137.18140929535232"/>
+        </scene>
+        <!--Repo Detail View Controller-->
+        <scene sceneID="LT2-eo-fOG">
+            <objects>
+                <viewController storyboardIdentifier="RepoDetailViewController" id="2ff-8q-6nv" customClass="RepoDetailViewController" customModule="get_git" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mRB-SP-Gp5"/>
+                        <viewControllerLayoutGuide type="bottom" id="IiZ-Jj-YpO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ydz-ao-Ftu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Td9-Pz-aOX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1879" y="153"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="github_logo_3x" width="1000" height="750"/>
+    </resources>
 </document>
