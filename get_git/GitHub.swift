@@ -11,6 +11,9 @@ import UIKit
 let kOAuthBaseURLString = "https://github.com/login/oauth/" //best practice is to start with lower case "k" or "g" k represents a global constant
 
 typealias GitHubAuthCompletion = (Bool)->()
+typealias FetchReposCompletion = ([Repository]?)->()
+
+
 
 enum GitHubAuthError : Error {
     case extractingCode
@@ -22,8 +25,26 @@ enum SaveOptions{
 
 class GitHub {
     
+    private var session: URLSession
+    private var components: URLComponents
     
     static let shared = GitHub()
+    
+    private init(){//this is making private vars valid
+        
+        self.session = URLSession(configuration: .default)
+        self.components = URLComponents()
+        
+        self.components.scheme = "https"
+        self.components.host = "api.github.com"
+        
+        if let token = UserDefaults.standard.getAccessToken(){
+            let queryItem = URLQueryItem(name: "access_token", value: token) //URLQueryItem builds our the url for us
+            self.components.queryItems = [queryItem]//it is then inserted into the array
+        }
+        
+    }
+    
     
     func oAuthRequestWith(parameters: [String : String]) {
         var parametersString = "" //will represent everything after question mark "?"
@@ -67,7 +88,9 @@ class GitHub {
             let requestString = "\(kOAuthBaseURLString)access_token?client_id=\(kgitHubClientID)&client_secret=\(kgitHubClinetSecret)&code=\(code)"
             
             if let requestURL = URL(string: requestString){
+                
                 let session = URLSession(configuration: .default)//its one of the 3 configurations "default"
+                
                 session.dataTask(with: requestURL, completionHandler: { (data, response, error) in
                     
                     if error != nil { complete(success: false) }
@@ -75,7 +98,9 @@ class GitHub {
                     
                     if let dataString = String(data: data, encoding: .utf8){
                         if UserDefaults().save(accessToken: dataString) {
+//                            guard let accessToken = dataString.components(separatedBy: "&").first?.components(separatedBy: "=").last else { complete(success: false); return } //this is what seperates the string up and just give the token
                             print("Saved!!")
+                            
                         }
                         print(dataString)
                         
@@ -89,4 +114,71 @@ class GitHub {
             
         }
     }
+    //escaping because it is requesting something out to the network for the repos
+    func getRepos(completion: @escaping FetchReposCompletion) {
+        
+        func returnToMain(results: [Repository]?){
+            OperationQueue.main.addOperation {
+                completion(results)
+            }
+        }
+        
+        self.components.path = "/users/repos"
+
+        guard let url = self.components.url else { returnToMain(results: nil); return }
+        
+        self.session.dataTask(with: url) { (data, response, error) in
+            
+            if error != nil { returnToMain(results: nil); return}//return here to prevent fall through
+            
+            if let data = data {
+                
+                var repositories = [Repository]()//var so that you can mutate and add more repos
+                
+                do{
+                    if let rootJson = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [[String : Any]]{
+                        
+                        for repositoryJSON in rootJson {
+                            if let repo = Repository(json: repositoryJSON){
+                                repositories.append(repo)
+                            }
+                        }
+                        returnToMain(results: repositories)
+                        
+                        print(rootJson)
+                        
+                    }
+                } catch {
+                
+                }
+                
+                
+                
+            }
+            
+        }.resume()//add this or it wont happen, common bug
+    }
+    
+    
+}
+
+
+
+
+
+
+
+/////////////////THIS IS THE WAY TO SEPERATE OUT THE STRING TO JUST ACCESS THE TOKEN WITHOUT THE REST OF THE STRING///////////////
+func accessTokenFrom(_ string: String) -> String? {
+    if string.contains("access_token") {
+        let components = string.components(separatedBy: "&")
+        
+        for component in components{
+            if component.contains("access_token"){
+                let token = component.components(separatedBy: "=").last
+                return token
+            }
+        }
+    }
+    return nil
 }
