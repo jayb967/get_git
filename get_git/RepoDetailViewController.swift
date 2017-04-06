@@ -23,9 +23,9 @@ class RepoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.repoNameDetailLabel.text = repo.name
-        self.descriptionDetailLabel.text = repo.description
+        self.descriptionDetailLabel.text =  repo.description
         self.languageDetailLabel.text = repo.language
-        self.numberOfStarsDetailLabel.text = String(describing: repo.stars)
+        self.numberOfStarsDetailLabel.text = String(describing: "Number of Times Starred: \(repo.stars)")
         
  //       //Attempt at formatting date with ISO8601DateFormatter but couldnt figure out options...
 //        let dateFormatter = ISO8601DateFormatter()

@@ -32,7 +32,7 @@ class Repository {
             
             self.isForked = isForked
             
-            self.createdDate = createdDate.formatCreatedDate() ?? "No date"
+            self.createdDate = "Created on: \(createdDate.formatCreatedDate()!)" //?? "No date"
 
             if let description = json["description"] as? String {
                 self.description = description
@@ -40,7 +40,7 @@ class Repository {
                 self.description = "No description"
             }
             if let language = json["language"] as? String {
-                self.language = language
+                self.language = "Written in \(language)"
             } else {
                 self.language = "Language unknown"
             }
