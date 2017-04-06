@@ -10,22 +10,47 @@ import Foundation
 
 class Repository {
     
+    
     let name: String
-    let description: String?
+    let stars: Int
+    let createdDate: String
+    let isForked: Bool
+    
+    let description: String?// if its nil
     let language: String?
-     
     
     
     init?(json: [String: Any]) { //Any because we are unsure of what were going to unwrap
         print(json)
-        if let name = json["name"] as? String, let description = json["description"] as? String, let language = json["language"] as? String{
+        
+
+        
+        if let name = json["name"] as? String, let stars = json["stargazers_count"] as? Int, let createdDate = json["created_at"] as? String, let isForked = json["forks"] as? Bool {
+            
             self.name = name
-            self.description = description
-            self.language = language
+            self.stars = stars
+            
+            self.isForked = isForked
+            
+            self.createdDate = createdDate.formatCreatedDate() ?? "No date"
+
+            if let description = json["description"] as? String {
+                self.description = description
+            } else {
+                self.description = "No description"
+            }
+            if let language = json["language"] as? String {
+                self.language = language
+            } else {
+                self.language = "Language unknown"
+            }
+
         } else {
             return nil
         }
 
     }
+    
+
     
 }

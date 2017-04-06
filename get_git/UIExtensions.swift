@@ -17,3 +17,14 @@ extension UIResponder {
 }
 
 
+extension String {
+    func formatCreatedDate() -> String? {
+        guard let date = self.components(separatedBy: "T").first else { return nil }
+        // 2017-01-06T21:40:15Z
+        
+        let year = date.components(separatedBy: "-")[0]
+        let month = date.components(separatedBy: "-")[1]
+        let day = date.components(separatedBy: "-")[2]
+        return ("\(month)-\(day)-\(year)")
+    }
+}

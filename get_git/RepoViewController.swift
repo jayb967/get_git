@@ -17,6 +17,7 @@ class RepoViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         self.tableViewContainingRepos.dataSource = self
         self.tableViewContainingRepos.delegate = self //this will make the segeu happen when cell is clicked
+        
         let repoNib = UINib(nibName: RepositoryCell.identifier, bundle: Bundle.main)
         self.tableViewContainingRepos.register(repoNib, forCellReuseIdentifier: RepositoryCell.identifier)
         self.tableViewContainingRepos.estimatedRowHeight = 100
@@ -59,12 +60,20 @@ class RepoViewController: UIViewController, UISearchBarDelegate {
             
             segue.destination.transitioningDelegate = self
             //needs an extension to conform to protocol
+            
+            if let repoSelectedAtIndex = tableViewContainingRepos.indexPathForSelectedRow?.row{
+                let selectedRepo = allReposArray[repoSelectedAtIndex]
+                
+                if let destinationController = segue.destination as? RepoDetailViewController{
+                    destinationController.repo = selectedRepo
+                }
+            }
         
         }
     }
 
 }
-//MARK: RpoDetailViewController transitioning delegate
+//MARK: RepoDetailViewController transitioning delegate
 extension RepoViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
