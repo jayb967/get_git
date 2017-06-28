@@ -8,11 +8,12 @@
 
 import UIKit
 
-class RepoViewController: UIViewController, UISearchBarDelegate {
+class RepoViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var tableViewContainingRepos: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewContainingRepos.dataSource = self
@@ -33,6 +34,12 @@ class RepoViewController: UIViewController, UISearchBarDelegate {
     var allReposArray = [Repository]() {
         didSet {
         self.tableViewContainingRepos.reloadData()
+        }
+    }
+    
+    var displayRepos: [Repository]? {
+        didSet {
+            self.tableViewContainingRepos.reloadData()
         }
     }
     
@@ -58,8 +65,8 @@ class RepoViewController: UIViewController, UISearchBarDelegate {
         
         if segue.identifier == RepoDetailViewController.identifier{
             
-            segue.destination.transitioningDelegate = self
             //needs an extension to conform to protocol
+            segue.destination.transitioningDelegate = self
             
             if let repoSelectedAtIndex = tableViewContainingRepos.indexPathForSelectedRow?.row{
                 let selectedRepo = allReposArray[repoSelectedAtIndex]
@@ -109,13 +116,56 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+//MARK: UISearchBarDelegate
+extension RepoViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if !searchText.validate() {
+            let lastIndex = searchText.index(before: searchText.endIndex)
+            searchBar.text = searchText.substring(to: lastIndex)
+        }
+        
+        if let searchedText = searchBar.text {
+            self.displayRepos = self.allReposArray.filter({$0.name.lowercased().contains(searchedText.lowercased())})
+        }
+        
+        if searchBar.text == "" {
+            self.displayRepos = nil
+        }
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.displayRepos = nil
+        self.searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+    }
+    
+    
+}
 
+
+
+//
 //extension RepoViewController: UISearchBarDelegate {
 //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-////        if let searchedText = searchBar.text {
-//            self.displayRepos = self.allReposArray.filter({$0.name.contains(searchedText)})
+//        
+//        if !searchText.validate() {
+//            //this will take off the last wrong character...it wont show in the text field..
+//            let lastIndex = searchText.index(before: searchText.endIndex)
+//            searchBar.text = searchText.substring(to: lastIndex)
+//            //searchBar.text = "Invalid!"//will change the text in the search Bar
+//            print(searchText)
+//        }
+//        
+//        if let searchedText = searchBar.text {
+//            self.allReposArray = self.allReposArray.filter({$0.name.contains(searchedText)})
 //                self.allReposArray.reloadData()
-////        }
+//        }
 //        if searhBar.text == ""{
 //            self.displayRepos = nil
 //        }

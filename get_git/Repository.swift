@@ -19,6 +19,8 @@ class Repository {
     let description: String?// if its nil
     let language: String?
     
+    let repoUrlString : String
+    
     
     init?(json: [String: Any]) { //Any because we are unsure of what were going to unwrap
         print(json)
@@ -33,6 +35,8 @@ class Repository {
             self.isForked = isForked
             
             self.createdDate = "Created on: \(createdDate.formatCreatedDate()!)" //?? "No date"
+            
+            self.repoUrlString = json["html_url"] as? String ?? "https://www.github.com"
 
             if let description = json["description"] as? String {
                 self.description = description
@@ -44,10 +48,23 @@ class Repository {
             } else {
                 self.language = "Language unknown"
             }
+//            
+//            let dateString = json["created_at"] as? Strings
+//            self.createdDate = Date.fromISO8691(dateString) ?? Date
+            
 
         } else {
             return nil
         }
+        //function to format date
+//        func ISO8601(_ string: String?) -> Date? {
+//            guard let string = string else {return else}
+//            
+//            let formatter = ISO8601DateFormatter()
+//            return formatter.date(from: string)
+//        }
+//        
+//        private func formatterWith(style: DateFormatter.Style) ->
 
     }
     

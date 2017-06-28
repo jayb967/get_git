@@ -1,0 +1,6 @@
+framework module Pods_get_git {
+  umbrella header "Pods-get_git-umbrella.h"
+
+  export *
+  module * { export * }
+}

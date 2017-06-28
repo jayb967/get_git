@@ -178,8 +178,6 @@ class GitHub {
         }
         return nil
     }
-    
-    
 }
 
 
