@@ -1,11 +1,11 @@
 PODS:
-  - FoldingCell (2.0.3)
+  - FoldingCell (2.0.5)
 
 DEPENDENCIES:
   - FoldingCell (~> 2.0.3)
 
 SPEC CHECKSUMS:
-  FoldingCell: 2f3113051609167776743415fc00ed877ac6d62c
+  FoldingCell: fb189fc746e95b722a1debf8ef455006b70cae2e
 
 PODFILE CHECKSUM: 3aa4a63f8ba7d986d0ef9f486a49ceda4accbbda
 

@@ -39,11 +39,12 @@ class GitHubAuthController: UIViewController {
         let parameters = ["scope" : "email,user,repo"] //you get scope from the github docs
         
         GitHub.shared.oAuthRequestWith(parameters: parameters)
-        
+        dismissAuthController()
         
     }
     
     func dismissAuthController() {
+        self.dismiss(animated: false, completion: nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
     }

@@ -19,6 +19,11 @@ extension UserDefaults {
         UserDefaults.standard.set(accessToken, forKey: "access_token")//use the set(value, forKey: String)
         return UserDefaults.standard.synchronize()//return a true or false on if the procedure went through correctly
     }
+    
+    func deleteToken() -> Bool {
+        UserDefaults.standard.removeObject(forKey: "access_token")
+        return UserDefaults.standard.synchronize()
+    }
 }
 
 //implementing the regex

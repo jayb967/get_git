@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if let token = UserDefaults.standard.getAccessToken(){
-            print(token)  
+            print(token)
+//            UserDefaults.standard.deleteToken()
         } else {
             presentAuthController()
         }
@@ -29,8 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func presentAuthController() {
-        if let repoViewController = self.window?.rootViewController as? RepoViewController, let
-            storyboard = repoViewController.storyboard {
+        if let repoViewController = self.window?.rootViewController as? RepoViewController, let storyboard = repoViewController.storyboard {
             
             if let authViewController = storyboard.instantiateViewController(withIdentifier: GitHubAuthController.identifier) as? GitHubAuthController {
                 
@@ -41,11 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 self.authController = authViewController
                 self.repoController = repoViewController
-            
-                
             }
         }
-    
+        else {
+            print("not working line 44 app delegate")
+        }
     }
     
     ///////////////////////////////Type this in to print the url///////////////////////////////////////////////////

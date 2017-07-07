@@ -19,8 +19,8 @@ class RepoViewController: UIViewController {
         self.tableViewContainingRepos.dataSource = self
         self.tableViewContainingRepos.delegate = self //this will make the segeu happen when cell is clicked
         
-        let repoNib = UINib(nibName: RepositoryCell.identifier, bundle: Bundle.main)
-        self.tableViewContainingRepos.register(repoNib, forCellReuseIdentifier: RepositoryCell.identifier)
+        let repoNib = UINib(nibName: RepositoryFoldingCellNIB.identifier, bundle: Bundle.main)
+        self.tableViewContainingRepos.register(repoNib, forCellReuseIdentifier: RepositoryFoldingCellNIB.identifier)
         self.tableViewContainingRepos.estimatedRowHeight = 100
         self.tableViewContainingRepos.rowHeight = UITableViewAutomaticDimension
 
@@ -100,7 +100,7 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     //needed for UITableViewDatasource protocol
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewContainingRepos.dequeueReusableCell(withIdentifier: RepositoryCell.identifier, for: indexPath) as! RepositoryCell
+        let cell = tableViewContainingRepos.dequeueReusableCell(withIdentifier: RepositoryFoldingCellNIB.identifier, for: indexPath) as! RepositoryFoldingCellNIB
         
         let currentRepoShowing = allReposArray[indexPath.row]
         

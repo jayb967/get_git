@@ -27,12 +27,15 @@ import UIKit
 open class FoldingCell: UITableViewCell {
   
   /// UIView whitch display when cell open
-  @IBOutlet weak open var containerView: UIView!
-  @IBOutlet weak open var containerViewTop: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerViewTop: NSLayoutConstraint!
+    
   
   /// UIView whitch display when cell close
-  @IBOutlet weak open var foregroundView: RotatedView!
-  @IBOutlet weak open var foregroundViewTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var foregroundViewTop: NSLayoutConstraint!
+    @IBOutlet weak var foregroundView: RotatedView!
+   
   var animationView: UIView?
   
   ///  the number of folding elements. Default 2
@@ -177,7 +180,7 @@ open class FoldingCell: UITableViewCell {
     self.contentView.addConstraints(newConstraints)
     
     for constraint in containerView.constraints { // added height constraint
-      if constraint.firstAttribute == .height {
+      if constraint.firstAttribute == .height, let item: UIView = constraint.firstItem as? UIView, item == containerView {
         let newConstraint = NSLayoutConstraint(item: animationView, attribute: constraint.firstAttribute,
           relatedBy: constraint.relation, toItem: nil, attribute: constraint.secondAttribute,
           multiplier: constraint.multiplier, constant: constraint.constant)
@@ -217,15 +220,13 @@ open class FoldingCell: UITableViewCell {
     let itemHeight = (contSize.height - 2 * forgSize.height) / CGFloat(itemCount - 2)
     
     if itemCount == 2 {
-            // decrease containerView height or increase itemCount
-            assert(contSize.height - 2 * forgSize.height == 0, "contanerView.height too high")
-        }
-        else{
-            // decrease containerView height or increase itemCount
-            assert(contSize.height - 2 * forgSize.height >= itemHeight, "contanerView.height too high")
-        }
-    // decrease containerView height or increase itemCount
-    assert(contSize.height - 2 * forgSize.height >= itemHeight, "contanerView.height too high")
+        // decrease containerView height or increase itemCount
+        assert(contSize.height - 2 * forgSize.height == 0, "contanerView.height too high")
+    }
+    else{
+        // decrease containerView height or increase itemCount
+        assert(contSize.height - 2 * forgSize.height >= itemHeight, "contanerView.height too high")
+    }
     
     var yPosition = 2 * forgSize.height
     var tag = 2
@@ -338,7 +339,7 @@ open class FoldingCell: UITableViewCell {
     var delay: TimeInterval = 0
     var timing                = kCAMediaTimingFunctionEaseIn
     var from: CGFloat         = 0.0;
-    var to: CGFloat           = CGFloat(-M_PI / 2)
+    var to: CGFloat           = -CGFloat.pi / 2
     var hidden                = true
     configureAnimationItems(.open)
     
@@ -351,9 +352,9 @@ open class FoldingCell: UITableViewCell {
       
       animatedView.foldingAnimation(timing, from: from, to: to, duration: durations[index], delay: delay, hidden: hidden)
       
-      from   = from == 0.0 ? CGFloat(M_PI / 2) : 0.0;
-      to     = to == 0.0 ? CGFloat(-M_PI / 2) : 0.0;
-      timing = timing == kCAMediaTimingFunctionEaseIn ? kCAMediaTimingFunctionEaseOut : kCAMediaTimingFunctionEaseIn;
+      from   = from == 0.0 ? CGFloat.pi / 2 : 0.0
+      to     = to == 0.0 ? -CGFloat.pi / 2 : 0.0
+      timing = timing == kCAMediaTimingFunctionEaseIn ? kCAMediaTimingFunctionEaseOut : kCAMediaTimingFunctionEaseIn
       hidden = !hidden
       delay += durations[index]
     }
@@ -389,7 +390,7 @@ open class FoldingCell: UITableViewCell {
     var delay: TimeInterval = 0
     var timing                = kCAMediaTimingFunctionEaseIn
     var from: CGFloat         = 0.0;
-    var to: CGFloat           = CGFloat(M_PI / 2)
+    var to: CGFloat           = CGFloat.pi / 2
     var hidden                = true
     configureAnimationItems(.close)
     
@@ -401,9 +402,9 @@ open class FoldingCell: UITableViewCell {
       
       animatedView.foldingAnimation(timing, from: from, to: to, duration: durations[index], delay: delay, hidden: hidden)
       
-      to     = to == 0.0 ? CGFloat(M_PI / 2) : 0.0;
-      from   = from == 0.0 ? CGFloat(-M_PI / 2) : 0.0;
-      timing = timing == kCAMediaTimingFunctionEaseIn ? kCAMediaTimingFunctionEaseOut : kCAMediaTimingFunctionEaseIn;
+      to     = to == 0.0 ? CGFloat.pi / 2 : 0.0
+      from   = from == 0.0 ? -CGFloat.pi / 2 : 0.0
+      timing = timing == kCAMediaTimingFunctionEaseIn ? kCAMediaTimingFunctionEaseOut : kCAMediaTimingFunctionEaseIn
       hidden = !hidden
       delay += durations[index]
     }
@@ -508,8 +509,8 @@ extension UIView {
   func pb_takeSnapshot(_ frame: CGRect) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(frame.size, false, 0.0)
     
-    let context = UIGraphicsGetCurrentContext();
-    context!.translateBy(x: frame.origin.x * -1, y: frame.origin.y * -1)
+    guard let context = UIGraphicsGetCurrentContext() else { return nil }
+    context.translateBy(x: frame.origin.x * -1, y: frame.origin.y * -1)
     
     guard let currentContext = UIGraphicsGetCurrentContext() else {
       return nil
