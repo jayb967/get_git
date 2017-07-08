@@ -20,6 +20,7 @@ class Repository {
     let language: String?
     
     let repoUrlString : String
+    let isPrivate: Bool
     
     
     init?(json: [String: Any]) { //Any because we are unsure of what were going to unwrap
@@ -27,7 +28,7 @@ class Repository {
         
 
         
-        if let name = json["name"] as? String, let stars = json["stargazers_count"] as? Int, let createdDate = json["created_at"] as? String, let isForked = json["forks"] as? Bool {
+        if let name = json["name"] as? String, let stars = json["stargazers_count"] as? Int, let createdDate = json["created_at"] as? String, let isForked = json["forks"] as? Bool, let isPrivate = json["private"] as? Bool {
             
             self.name = name
             self.stars = stars
@@ -37,6 +38,7 @@ class Repository {
             self.createdDate = "Created on: \(createdDate.formatCreatedDate()!)" //?? "No date"
             
             self.repoUrlString = json["html_url"] as? String ?? "https://www.github.com"
+            self.isPrivate = isPrivate
 
             if let description = json["description"] as? String {
                 self.description = description

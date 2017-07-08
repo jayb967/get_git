@@ -81,7 +81,8 @@ open class FoldingCell: UITableViewCell {
     self.selectionStyle = .none
     
     foregroundView.layer.cornerRadius = 15
-    containerView.layer.cornerRadius = foregroundView.layer.cornerRadius
+    foregroundView.layer.masksToBounds = true
+//    containerView.layer.cornerRadius = foregroundView.layer.cornerRadius
     containerView.layer.masksToBounds = true
   }
 

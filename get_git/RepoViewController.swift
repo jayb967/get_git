@@ -31,9 +31,12 @@ class RepoViewController: UIViewController {
         
         let repoNib = UINib(nibName: RepositoryFoldingCellNIB.identifier, bundle: Bundle.main)
         self.tableViewContainingRepos.register(repoNib, forCellReuseIdentifier: RepositoryFoldingCellNIB.identifier)
-        self.tableViewContainingRepos.estimatedRowHeight = 100
+        self.tableViewContainingRepos.estimatedRowHeight = 105
         self.tableViewContainingRepos.rowHeight = UITableViewAutomaticDimension
-
+        let tempImageView = UIImageView(image: UIImage(named: "gitBackgroundGradient"))
+        tempImageView.frame = self.tableViewContainingRepos.frame
+        self.tableViewContainingRepos.backgroundView = tempImageView;
+        
         self.searchBar.delegate = self
         
         update()
@@ -64,7 +67,9 @@ class RepoViewController: UIViewController {
         
         GitHub.shared.getRepos { (repositories) in
             for repo in repositories! {
+                if repo.isPrivate == false{
                 self.allReposArray.append(repo)
+                }
             }
         }
         
@@ -112,6 +117,8 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allReposArray.count
     }
+    
+    
     //needed for UITableViewDatasource protocol
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewContainingRepos.dequeueReusableCell(withIdentifier: RepositoryFoldingCellNIB.identifier, for: indexPath) as! RepositoryFoldingCellNIB
@@ -121,6 +128,10 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
         cell.repoNameLabel.text = currentRepoShowing.name
 //        cell.descriptionLabel.text = currentRepoShowing.description
         cell.languageLabel.text = currentRepoShowing.language
+//        cell.imageView?.layer.cornerRadius = 15
+//        cell.imageView?.layer.isOpaque = false
+//        cell.imageView?.layer.masksToBounds = true
+        cell.backgroundColor = .clear
         
         return cell
     }
