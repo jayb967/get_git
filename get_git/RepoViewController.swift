@@ -15,12 +15,12 @@ class RepoViewController: UIViewController {
     
     @IBOutlet weak var tableViewContainingRepos: UITableView!
     
-    var cellHeights = (100..<300).map { _ in C.CellHeight.close }
+    var cellHeights = (110..<300).map { _ in C.CellHeight.close }
     
     fileprivate struct C {
         struct CellHeight {
-            static let close: CGFloat = 100 // equal or greater foregroundView height
-            static let open: CGFloat = 200 // equal or greater containerView height
+            static let close: CGFloat = 110 // equal or greater foregroundView height
+            static let open: CGFloat = 195 // equal or greater containerView height
         }
     }
     
@@ -136,13 +136,13 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         var duration = 0.0
-        if cellHeights[indexPath.row] == 100 {
-            cellHeights[indexPath.row] = 280
+        if cellHeights[indexPath.row] == 110 {
+            cellHeights[indexPath.row] = 218
             cell.selectedAnimation(true, animated: true, completion: nil)
             duration = 0.5
         } else {
             // close
-            cellHeights[indexPath.row] = 100
+            cellHeights[indexPath.row] = 110
             cell.selectedAnimation(false, animated: true, completion: nil)
             duration = 0.8
         }
