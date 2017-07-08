@@ -30,7 +30,6 @@ open class FoldingCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerViewTop: NSLayoutConstraint!
     
-  
   /// UIView whitch display when cell close
     
     @IBOutlet weak var foregroundViewTop: NSLayoutConstraint!
@@ -39,7 +38,7 @@ open class FoldingCell: UITableViewCell {
   var animationView: UIView?
   
   ///  the number of folding elements. Default 2
-  @IBInspectable open var itemCount: NSInteger = 2
+  @IBInspectable open var itemCount: NSInteger = 4
   
   /// The color of the back cell
   @IBInspectable open var backViewColor: UIColor = UIColor.brown
@@ -81,6 +80,7 @@ open class FoldingCell: UITableViewCell {
     
     self.selectionStyle = .none
     
+    foregroundView.layer.cornerRadius = 15
     containerView.layer.cornerRadius = foregroundView.layer.cornerRadius
     containerView.layer.masksToBounds = true
   }

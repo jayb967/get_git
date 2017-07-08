@@ -91,6 +91,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="containerView" destination="bPc-sb-NDn" id="V4n-lB-GSh"/>
+                <outlet property="containerViewTop" destination="qpf-Qe-luh" id="QB5-t4-RDb"/>
                 <outlet property="foregroundView" destination="fj3-Be-mkR" id="mwk-8k-F0W"/>
                 <outlet property="foregroundViewTop" destination="cGG-Mh-iqs" id="Yu3-Rh-EzO"/>
                 <outlet property="languageLabel" destination="O4C-XY-Eyq" id="hMT-ar-cFY"/>

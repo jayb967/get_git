@@ -8,6 +8,7 @@
 
 import UIKit
 import FoldingCell
+import FoldingCell.Swift
 
 protocol MyFoldingCellDelegate {
     func didTapMoreDetail(_ sender: Any?)
@@ -15,9 +16,8 @@ protocol MyFoldingCellDelegate {
 
 
 class RepositoryFoldingCellNIB: FoldingCell {
-    
+    //foregroundView Labels
     @IBOutlet weak var repoNameLabel: UILabel!
-    
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
    
