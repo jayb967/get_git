@@ -11,7 +11,7 @@ import WebKit //access to wk
 
 
 //This makes it to take out all the buttons and looks like a web view
-class WebViewController: UIViewController {
+class WebViewController: DismissViewController {
     
     let webView = WKWebView()
     

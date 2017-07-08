@@ -8,7 +8,6 @@
 
 import UIKit
 import FoldingCell
-import FoldingCell.Swift
 
 protocol MyFoldingCellDelegate {
     func didTapMoreDetail(_ sender: Any?)
@@ -19,15 +18,32 @@ class RepositoryFoldingCellNIB: FoldingCell {
     //foregroundView Labels
     @IBOutlet weak var repoNameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-   
+    
+    //Container Labels
+    @IBOutlet weak var createdDetailLabel: UILabel!
+    @IBOutlet weak var numberOfStarsDetailLabel: UILabel!
+    @IBOutlet weak var forkedOrNotDetailLabel: UILabel!
+    @IBOutlet weak var descriptionDetailLabel: UILabel!
+    @IBOutlet weak var languageDetailLabel: UILabel!
+    
+    @IBOutlet weak var repoNameDetailLabel: UILabel!
+    
     var delegate: MyFoldingCellDelegate?
+    var tableView: RepoViewController!
+  
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
+
+    @IBAction func repoButtonPressed(_ sender: UIButton) {
+        if let delegate = self.delegate {
+            delegate.didTapMoreDetail(sender)
+        }
+            
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

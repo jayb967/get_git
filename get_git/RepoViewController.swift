@@ -8,14 +8,13 @@
 
 import UIKit
 import FoldingCell
+import SafariServices
 
 class RepoViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var tableViewContainingRepos: UITableView!
-    
-    var cellHeights = (110..<300).map { _ in C.CellHeight.close }
     
     fileprivate struct C {
         struct CellHeight {
@@ -43,6 +42,10 @@ class RepoViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    var cellHeights = (110..<300).map { _ in C.CellHeight.close }
+    var repo : Repository!
+    
     //array holding all repos that get pulled in from json
     var allReposArray = [Repository]() {
         didSet {
@@ -61,9 +64,9 @@ class RepoViewController: UIViewController {
         
         GitHub.shared.getRepos { (repositories) in
             for repo in repositories! {
-                if repo.isPrivate == false{
+//                if repo.isPrivate == false{
                 self.allReposArray.append(repo)
-                }
+//                }
             }
         }
         
@@ -109,7 +112,7 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     
     //needed for UITableViewDatasource protocol
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allReposArray.count
+       return displayRepos?.count ?? allReposArray.count
     }
     
     
@@ -118,9 +121,9 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableViewContainingRepos.dequeueReusableCell(withIdentifier: RepositoryFoldingCellNIB.identifier, for: indexPath) as! RepositoryFoldingCellNIB
         
         let currentRepoShowing = allReposArray[indexPath.row]
+        cell.delegate = self
         
         cell.repoNameLabel.text = currentRepoShowing.name
-//        cell.descriptionLabel.text = currentRepoShowing.description
         cell.languageLabel.text = currentRepoShowing.language
         cell.backgroundColor = .clear
         
@@ -135,6 +138,7 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.cellForRow(at: indexPath) as? RepositoryFoldingCellNIB else {
             return
         }
+
         var duration = 0.0
         if cellHeights[indexPath.row] == 110 {
             cellHeights[indexPath.row] = 218
@@ -146,16 +150,51 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectedAnimation(false, animated: true, completion: nil)
             duration = 0.8
         }
+        let currentRepoShowing = allReposArray[indexPath.row]
+        
+        cell.repoNameDetailLabel.text = currentRepoShowing.name
+        cell.descriptionDetailLabel.text =  currentRepoShowing.description
+        cell.languageDetailLabel.text = currentRepoShowing.language
+        cell.numberOfStarsDetailLabel.text = String(describing: "\(currentRepoShowing.stars)")
+        cell.createdDetailLabel.text = currentRepoShowing.createdDate
+        cell.forkedOrNotDetailLabel.text = currentRepoShowing.isForked ? "Forked" : "Not forked"//this is a teranery operator which is a different form of if statement
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
             tableView.beginUpdates()
             tableView.endUpdates()
         }, completion: nil)
     }
-   
+    
+    func presentSafariViewControllerWith(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        let safariController = SFSafariViewController(url: url)
+        self.present(safariController, animated: true, completion: nil)
+    }
+    
+    func presentWebViewControllerWith(urlString: String) {
+        let webController = WebViewController()
+        webController.url = urlString
+        
+        self.present(webController, animated: true, completion: nil)
+        
+    }
     
     
 }
+//MARK: MyFoldingCellDelegate
+extension RepoViewController: MyFoldingCellDelegate {
+    func didTapMoreDetail(_ sender: Any?) {
+        
+        if let selectedIndex = self.tableViewContainingRepos.indexPathForSelectedRow?.row {
+            let repo = self.allReposArray[selectedIndex]
+        
+        self.presentWebViewControllerWith(urlString: repo.repoUrlString)
+        self.presentSafariViewControllerWith(urlString: repo.repoUrlString)
+    }
+}
+}
+
 //MARK: UISearchBarDelegate
 extension RepoViewController: UISearchBarDelegate {
     
@@ -168,6 +207,7 @@ extension RepoViewController: UISearchBarDelegate {
         
         if let searchedText = searchBar.text {
             self.displayRepos = self.allReposArray.filter({$0.name.lowercased().contains(searchedText.lowercased())})
+            self.tableViewContainingRepos.reloadData()
         }
         
         if searchBar.text == "" {

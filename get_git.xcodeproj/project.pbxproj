@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28CBB1C11F10966F006D3922 /* DismissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CBB1C01F10966F006D3922 /* DismissViewController.swift */; };
 		28E4A7711F1046FF00607BFF /* RepositoryFoldingCellNIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E4A76F1F1046FF00607BFF /* RepositoryFoldingCellNIB.swift */; };
 		28E4A7721F1046FF00607BFF /* RepositoryFoldingCellNIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E4A7701F1046FF00607BFF /* RepositoryFoldingCellNIB.xib */; };
 		28FCE3E51E92B22A00212B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE3E41E92B22A00212B82 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		0D8CD9798DDFD51414392E72 /* Pods-get_git.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-get_git.release.xcconfig"; path = "Pods/Target Support Files/Pods-get_git/Pods-get_git.release.xcconfig"; sourceTree = "<group>"; };
 		1486A7F98B4337F20CC21B22 /* Pods_get_gitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_get_gitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28CBB1C01F10966F006D3922 /* DismissViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissViewController.swift; sourceTree = "<group>"; };
 		28E4A76F1F1046FF00607BFF /* RepositoryFoldingCellNIB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFoldingCellNIB.swift; sourceTree = "<group>"; };
 		28E4A7701F1046FF00607BFF /* RepositoryFoldingCellNIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryFoldingCellNIB.xib; sourceTree = "<group>"; };
 		28FCE3E11E92B22A00212B82 /* get_git.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = get_git.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 		28FCE4AD1E9400B300212B82 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28CBB1C01F10966F006D3922 /* DismissViewController.swift */,
 				28FCE4B71E95707000212B82 /* CustomTransition.swift */,
 				28FCE4B51E956E8A00212B82 /* RepoDetailViewController.swift */,
 				28FCE4AF1E940C0A00212B82 /* RepoViewController.swift */,
@@ -481,6 +484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28CBB1C11F10966F006D3922 /* DismissViewController.swift in Sources */,
 				28FCE4171E92EC2B00212B82 /* FoundationExtensions.swift in Sources */,
 				28E4A7711F1046FF00607BFF /* RepositoryFoldingCellNIB.swift in Sources */,
 				28FCE4B21E940D6100212B82 /* UIExtensions.swift in Sources */,

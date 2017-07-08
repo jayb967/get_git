@@ -22,9 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         if let token = UserDefaults.standard.getAccessToken(){
             print(token)
-//            UserDefaults.standard.deleteToken()
+        //   UserDefaults.standard.deleteToken()
         } else {
-            presentAuthController()
+            let parameters = ["scope" : "email,user,repo"] //you get scope from the github docs
+            
+            GitHub.shared.oAuthRequestWith(parameters: parameters)
+            
+        //    presentAuthController()
         }
         return true
     }

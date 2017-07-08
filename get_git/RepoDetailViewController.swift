@@ -18,9 +18,11 @@ class RepoDetailViewController: UIViewController {
     @IBOutlet weak var createdDetailLabel: UILabel!
     
     @IBOutlet weak var forkedOrNotDetailLabel: UILabel!
+    
     @IBAction func doneButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func moreDetailsPressed(_ sender: Any) {
         guard let repo = repo else { return }
         
