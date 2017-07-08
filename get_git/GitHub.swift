@@ -162,7 +162,7 @@ class GitHub {
                 
             }
             
-        }.resume()//add this or it wont happen, common bug
+        }.resume()//add or it wont happen, common bug
     }
     /////////////////THIS IS THE WAY TO SEPERATE OUT THE STRING TO JUST ACCESS THE TOKEN WITHOUT THE REST OF THE STRING///////////////
     func accessTokenFrom(_ string: String) -> String? {

@@ -56,12 +56,6 @@ class RepoViewController: UIViewController {
         }
     }
     
-//    var displayRepos : [Repository]? {
-//        didSet{
-//            self.tableViewContainingRepos.reloadData()
-//        }
-//    }
-
     func update() {
         print("update repo controller here!!")
         
@@ -128,15 +122,12 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
         cell.repoNameLabel.text = currentRepoShowing.name
 //        cell.descriptionLabel.text = currentRepoShowing.description
         cell.languageLabel.text = currentRepoShowing.language
-//        cell.imageView?.layer.cornerRadius = 15
-//        cell.imageView?.layer.isOpaque = false
-//        cell.imageView?.layer.masksToBounds = true
         cell.backgroundColor = .clear
         
         return cell
     }
     
-//    //this is the function that is makeing the cell selectiong to go onto the tableview details page
+//    //this is the function that is making the cell selection go onto the tableview details page
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        self.performSegue(withIdentifier: RepoDetailViewController.identifier, sender: nil)
 //    }
